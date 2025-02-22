@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investing in Synthesis - TapeGossip</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --link-color: #3377cc;
+            --link-hover: #1a5eb3;
+            --date-color: #666666;
+            --border-color: #eaeaea;
+            --preview-color: #4a5568;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --link-color: #77aaff;
+            --link-hover: #99ccff;
+            --date-color: #a0aec0;
+            --border-color: #2d3748;
+            --preview-color: #cbd5e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styles */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .site-title a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .site-subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-weight: normal;
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: var(--link-hover);
+        }
+
+        .theme-switch {
+            cursor: pointer;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        /* Article styles */
+        .article-title {
+            font-size: 2.5rem;
+            margin: 2rem 0 1rem;
+            line-height: 1.2;
+        }
+
+        .article-date {
+            color: var(--date-color);
+            margin-bottom: 2rem;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer styles */
+        .footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--link-color);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--date-color);
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .site-title {
+                font-size: 1.5rem;
+                align-items: flex-start;
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+
+            nav {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .article-title {
+                font-size: 2rem;
+                margin: 1.5rem 0 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.75rem;
+            }
+
+            .header-container {
+                margin-bottom: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.25rem;
+            }
+
+            .article-title {
+                font-size: 1.75rem;
+            }
+
+            .article-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="header-container">
+            <h1 class="site-title">
+                <a href="../index.html">
+                    TapeGossip
+                    <span class="site-subtitle">anon</span>
+                </a>
+            </h1>
+            <nav>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../essays.html">Essays</a>
+                    <a href="../library.html">Library</a>
+                </div>
+                <button class="theme-switch" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+
+        <article>
+            <h1 class="article-title">Investing in Synthesis</h1>
+            <div class="article-date">Mar 15 2024</div>
+            <div class="article-content">
+                <p>Coming soon...</p>
+            </div>
+        </article>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://twitter.com/tapegossip" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a href="mailto:tapegossip@gmail.com">
+                    <i class="far fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </div>
+            <div class="footer-text">
+                © 2025 TapeGossip
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    </script>
+</body>
+</html>

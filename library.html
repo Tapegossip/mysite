@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic meta tags for character encoding and responsive viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library - TapeGossip</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Light theme variables */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --link-color: #3377cc;
+            --link-hover: #1a5eb3;
+            --date-color: #666666;
+            --border-color: #eaeaea;
+            --preview-color: #4a5568;
+            --input-bg: #ffffff;
+        }
+
+        /* Dark theme variables */
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --link-color: #77aaff;
+            --link-hover: #99ccff;
+            --date-color: #a0aec0;
+            --border-color: #2d3748;
+            --preview-color: #cbd5e0;
+            --input-bg: #1a1a1a;
+        }
+
+        /* Base body styles with flex column layout */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header layout with logo and navigation */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Site title and logo styling */
+        .site-title {
+            font-size: 1.8rem;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .site-title a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .site-subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-weight: normal;
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation menu and links */
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: var(--link-hover);
+        }
+
+        /* Theme toggle button */
+        .theme-switch {
+            cursor: pointer;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        /* Library search and filter container */
+        .library-controls {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Search input - takes remaining space with flex: 1 */
+        .search-input {
+            flex: 1;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Filter dropdown - fixed minimum width */
+        .type-filter {
+            min-width: 120px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Hover effects - border changes to text color (white in dark mode, black in light mode) */
+        .search-input:hover,
+        .type-filter:hover {
+            border-color: var(--text-color);
+        }
+
+        .search-input::placeholder {
+            color: var(--date-color);
+        }
+
+        /* Library table layout */
+        .library-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .library-table th,
+        .library-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .library-table th {
+            font-weight: 600;
+        }
+
+        /* External link styling */
+        .external-link {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        .external-link:hover {
+            color: var(--link-hover);
+        }
+
+        /* Footer styling - sticks to bottom with margin-top: auto */
+        .footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Social links in footer */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links a:hover {
+            color: var(--link-color);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--date-color);
+        }
+
+        /* Tablet view adjustments (max-width: 768px) */
+        @media (max-width: 768px) {
+            /* Reduced padding for smaller screens */
+            body {
+                padding: 1rem;
+            }
+
+            /* Stack header items vertically */
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            /* Full width navigation */
+            nav {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            /* Stack search and filter vertically */
+            .library-controls {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            /* Adjust table text size and padding */
+            .search-input,
+            .type-filter {
+                width: 100%;
+            }
+
+            .library-table th,
+            .library-table td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .site-title {
+                font-size: 1.5rem;
+                align-items: flex-start;
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+        }
+
+        /* Mobile view adjustments (max-width: 480px) */
+        @media (max-width: 480px) {
+            /* Hide year column on very small screens */
+            .library-table th:nth-child(3),
+            .library-table td:nth-child(3) {
+                display: none;
+            }
+
+            /* Further reduce table text size and padding */
+            .library-table th,
+            .library-table td {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with site title and navigation -->
+    <div class="header-container">
+        <h1 class="site-title">
+            <a href="index.html">
+                TapeGossip
+                <span class="site-subtitle">anon</span>
+            </a>
+        </h1>
+        <nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="essays.html">Essays</a>
+                <a href="library.html">Library</a>
+            </div>
+            <button class="theme-switch" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Library search and filter controls -->
+    <div class="library-controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by title, author, or tag...">
+        <select id="typeFilter" class="type-filter">
+            <option value="all">All</option>
+            <option value="book">Books</option>
+            <option value="article">Articles</option>
+            <option value="paper">Papers</option>
+        </select>
+    </div>
+
+    <!-- Library content table -->
+    <table class="library-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="libraryContent">
+            <!-- Content will be populated by JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Footer with social links -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://twitter.com/tapegossip" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a href="mailto:tapegossip@gmail.com">
+                    <i class="far fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </div>
+            <div class="footer-text">
+                © 2025 TapeGossip
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Theme toggle functionality */
+        // Get DOM elements and initialize theme
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        // Theme toggle click handler
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        // Update moon/sun icon based on theme
+        function updateIcon(theme) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        /* Library content and filtering logic */
+        // Sample library data
+        const contents = [
+            {
+                title: "The Psychology of Money",
+                author: "Morgan Housel",
+                publishedYear: 2020,
+                link: "https://www.goodreads.com/book/show/41881472-the-psychology-of-money",
+                tags: ["finance", "psychology", "personal development"],
+                type: "book"
+            },
+            {
+                title: "The Beginning of Infinity",
+                author: "David Deutsch",
+                publishedYear: 2011,
+                link: "https://www.goodreads.com/book/show/10483171-the-beginning-of-infinity",
+                tags: ["philosophy", "science", "progress"],
+                type: "book"
+            }
+        ];
+
+        // Get DOM elements for library functionality
+        const searchInput = document.getElementById('searchInput');
+        const typeFilter = document.getElementById('typeFilter');
+        const libraryContent = document.getElementById('libraryContent');
+
+        // Render library content with search and filter
+        function renderLibrary() {
+            // Get current search term and filter
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedType = typeFilter.value;
+
+            // Filter contents based on search and type
+            const filteredContents = contents.filter(content => 
+                (content.title.toLowerCase().includes(searchTerm) ||
+                content.author.toLowerCase().includes(searchTerm) ||
+                content.tags.some(tag => tag.toLowerCase().includes(searchTerm))) &&
+                (selectedType === 'all' || content.type === selectedType)
+            );
+
+            // Render filtered content to table
+            libraryContent.innerHTML = filteredContents.map(content => `
+                <tr>
+                    <td>${content.title}</td>
+                    <td>${content.author}</td>
+                    <td>${content.publishedYear}</td>
+                    <td>
+                        <a href="${content.link}" class="external-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Add event listeners for real-time filtering
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        searchInput.addEventListener('input', debounce(renderLibrary, 300));
+        typeFilter.addEventListener('change', renderLibrary);
+
+        // Initial render on page load
+        renderLibrary();
+    </script>
+</body>
+</html>

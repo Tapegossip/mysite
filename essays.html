@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essays - TapeGossip</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Theme variables - matching index.html */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --link-color: #3377cc;
+            --link-hover: #1a5eb3;
+            --date-color: #666666;
+            --border-color: #eaeaea;
+            --preview-color: #4a5568;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --link-color: #77aaff;
+            --link-hover: #99ccff;
+            --date-color: #a0aec0;
+            --border-color: #2d3748;
+            --preview-color: #cbd5e0;
+        }
+
+        /* Base styles - matching index.html */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content-wrapper {
+            flex: 1;
+        }
+
+        /* Header styles - matching index.html */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .site-title a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .site-subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-weight: normal;
+            margin-top: 0.5rem;
+        }
+
+        /* Navigation styles - matching index.html */
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: var(--link-hover);
+        }
+
+        .theme-switch {
+            cursor: pointer;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        /* Essays section specific styles */
+        .essays-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .essay-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .essay-item:last-child {
+            border-bottom: none;
+        }
+
+        .essay-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .essay-title a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .essay-title a:hover {
+            color: var(--link-color);
+        }
+
+        .essay-date {
+            font-size: 0.9rem;
+            color: var(--date-color);
+            margin-bottom: 1rem;
+        }
+
+        .essay-preview {
+            color: var(--preview-color);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Footer styles - matching index.html */
+        .footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--link-color);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--date-color);
+        }
+
+        /* Responsive styles - matching index.html */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .site-title {
+                font-size: 1.5rem;
+                align-items: flex-start;
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+
+            nav {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .theme-switch {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.75rem;
+            }
+
+            .header-container {
+                margin-bottom: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.25rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .essay-title {
+                font-size: 1.3rem;
+            }
+
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="header-container">
+            <h1 class="site-title">
+                <a href="./index.html">
+                    TapeGossip
+                    <span class="site-subtitle">anon</span>
+                </a>
+            </h1>
+            <nav>
+                <div class="nav-links">
+                    <a href="./index.html">Home</a>
+                    <a href="./essays.html">Essays</a>
+                    <a href="./library.html">Library</a>
+                </div>
+                <button class="theme-switch" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+
+        <div class="essays-section">
+            <div class="essays-list">
+                <div class="essay-item">
+                    <h2 class="essay-title">
+                        <a href="articles/civilizational-primitives.html">Civilizational Primitives</a>
+                    </h2>
+                    <div class="essay-date">Wed Nov 16 2022</div>
+                    <p class="essay-preview">
+                        At the dawn of civilization, with the introduction of the agricultural revolution, humans needed to coordinate in larger numbers...
+                    </p>
+                </div>
+
+                <div class="essay-item">
+                    <h2 class="essay-title">
+                        <a href="articles/investing-in-synthesis.html">Investing in Synthesis</a>
+                    </h2>
+                    <div class="essay-date">Mar 15 2024</div>
+                    <p class="essay-preview">
+                        Coming soon...
+                    </p>
+                </div>
+
+                <div class="essay-item">
+                    <h2 class="essay-title">
+                        <a href="articles/why-learn-compilers.html">Why Learn Compilers</a>
+                    </h2>
+                    <div class="essay-date">Mar 15 2024</div>
+                    <p class="essay-preview">
+                        Coming soon...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://twitter.com/tapegossip" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a href="mailto:tapegossip@gmail.com">
+                    <i class="far fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </div>
+            <div class="footer-text">
+                © 2025 TapeGossip
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    </script>
+</body>
+</html>
